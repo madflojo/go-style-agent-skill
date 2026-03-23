@@ -1,0 +1,28 @@
+// Markdownlint configuration for go-style-agent-skill
+// https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+{
+  // MD009 - No trailing spaces
+  "MD009": true,
+
+  // MD010 - No hard tabs
+  "MD010": true,
+
+  // MD012 - No multiple consecutive blank lines
+  "MD012": true,
+
+  // MD013 - Line length: disabled (code examples and tables often exceed 80 chars)
+  "MD013": false,
+
+  // MD024 - No duplicate heading text: allow siblings with the same name
+  // (e.g., "Summary" appearing in multiple sections)
+  "MD024": {
+    "siblings_only": true
+  },
+
+  // MD033 - No inline HTML: disabled (some docs may need HTML)
+  "MD033": false,
+
+  // MD041 - First line in a file should be a top-level heading
+  // YAML front matter (---) is recognized and skipped automatically
+  "MD041": true
+}
