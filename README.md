@@ -21,7 +21,7 @@ It is designed to be useful to both human engineers and coding agents.
 
 ## Opinionated by design
 
-This guide reflects Benjamin Cane's personal engineering preferences. It is not
+This guide reflects personal preferences. It is not
 intended to be a universal or official Go style guide.
 
 The goal is consistency, maintainability, and production readiness in real
