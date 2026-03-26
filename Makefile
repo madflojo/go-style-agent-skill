@@ -20,14 +20,14 @@ lint-markdown:
 		echo 'markdownlint-cli2 is required for make lint-markdown'; \
 		exit 1; \
 	}
-	@find . -name '*.md' -print0 | xargs -0 $(MARKDOWNLINT)
+	@find . -name '*.md' ! -name 'CHANGELOG.md' -print0 | xargs -0 $(MARKDOWNLINT)
 
 lint-links:
 	@command -v $(LYCHEE) >/dev/null 2>&1 || { \
 		echo 'lychee is required for make lint-links'; \
 		exit 1; \
 	}
-	@find . -name '*.md' -print0 | xargs -0 $(LYCHEE) --offline --no-progress --include-fragments
+	@find . -name '*.md' ! -name 'CHANGELOG.md' -print0 | xargs -0 $(LYCHEE) --offline --no-progress --include-fragments
 
 clean:
 	@echo 'Nothing to clean.'

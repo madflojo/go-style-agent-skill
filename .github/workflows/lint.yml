@@ -17,7 +17,9 @@ jobs:
       - name: Run markdownlint-cli2
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
-          globs: "**/*.md"
+          globs: |
+            **/*.md
+            !CHANGELOG.md
 
   link-check:
     name: Check internal links
@@ -33,5 +35,6 @@ jobs:
             --offline
             --no-progress
             --include-fragments
+            --exclude-path CHANGELOG.md
             "**/*.md"
           fail: true
