@@ -66,11 +66,10 @@ skills/
 
 Copy the `skills/go-style-guide/` directory into either:
 
-- your repository's `.agents/skills/` directory (or `.devin/skills/` for Devin)
-- your user-level `~/.agents/skills/` directory (or `~/.config/devin/skills/` for Devin)
+- your repository's `.agents/skills/` directory
+- your user-level `~/.agents/skills/` directory
 
-This path convention is supported by Devin and other agent tools that read
-skill directories. Adapt the destination to your tool's convention if it
+Adapt the destination to your agent tool's skill-directory convention if it
 differs.
 
 In both cases, the final path should end with:
@@ -135,35 +134,10 @@ lookup. Agents should start with `SKILL.md` and read only the specific
 - [Concurrency](skills/go-style-guide/references/CONCURRENCY.md)
 - [Review Checklist](skills/go-style-guide/references/REVIEW-CHECKLIST.md)
 
-## Validation and examples
-
-This repository treats markdown linting as a baseline quality gate, and the
-skill itself is structured so topic-specific references can be used without
-loading the entire corpus into context.
-
-When guidance changes materially, contributors should also consider adding or
-updating sample prompts, expected outputs, or other evaluation artifacts so the
-skill's behavior is easier to validate over time.
-
 ## Contributing
 
 Contributions are welcome. Please read
 [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
-
-## Releases
-
-This repository uses Release Please to manage GitHub releases from conventional
-commit history.
-
-- Pushes to `main` trigger the Release Please workflow.
-- Release Please opens or updates a release PR when releasable commits are
-  present.
-
-- Merging that release PR creates the Git tag and GitHub Release.
-
-Git tags are the canonical release version for this repository.
-`skills/go-style-guide/SKILL.md` metadata is informational and is not updated by
-the release workflow.
 
 ## License
 
