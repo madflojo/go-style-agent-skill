@@ -135,16 +135,6 @@ lookup. Agents should start with `SKILL.md` and read only the specific
 - [Concurrency](skills/go-style-guide/references/CONCURRENCY.md)
 - [Review Checklist](skills/go-style-guide/references/REVIEW-CHECKLIST.md)
 
-## Validation and examples
-
-This repository treats markdown linting as a baseline quality gate, and the
-skill itself is structured so topic-specific references can be used without
-loading the entire corpus into context.
-
-When guidance changes materially, contributors should also consider adding or
-updating sample prompts, expected outputs, or other evaluation artifacts so the
-skill's behavior is easier to validate over time.
-
 ## Contributing
 
 Contributions are welcome. Please read
