@@ -66,11 +66,10 @@ skills/
 
 Copy the `skills/go-style-guide/` directory into either:
 
-- your repository's `.agents/skills/` directory (or `.devin/skills/` for Devin)
-- your user-level `~/.agents/skills/` directory (or `~/.config/devin/skills/` for Devin)
+- your repository's `.agents/skills/` directory
+- your user-level `~/.agents/skills/` directory
 
-This path convention is supported by Devin and other agent tools that read
-skill directories. Adapt the destination to your tool's convention if it
+Adapt the destination to your agent tool's skill-directory convention if it
 differs.
 
 In both cases, the final path should end with:

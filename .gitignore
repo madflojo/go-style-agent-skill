@@ -10,6 +10,3 @@
 # OS files
 .DS_Store
 Thumbs.db
-
-# Devin local config
-.devin/
