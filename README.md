@@ -150,21 +150,6 @@ skill's behavior is easier to validate over time.
 Contributions are welcome. Please read
 [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
-## Releases
-
-This repository uses Release Please to manage GitHub releases from conventional
-commit history.
-
-- Pushes to `main` trigger the Release Please workflow.
-- Release Please opens or updates a release PR when releasable commits are
-  present.
-
-- Merging that release PR creates the Git tag and GitHub Release.
-
-Git tags are the canonical release version for this repository.
-`skills/go-style-guide/SKILL.md` metadata is informational and is not updated by
-the release workflow.
-
 ## License
 
 This project is licensed under [Apache-2.0](LICENSE).

@@ -98,6 +98,10 @@ only and is not release-managed.
 Changes merged without a conventional commit prefix can still land, but they may
 not produce useful release notes.
 
+If the Release Please workflow cannot create its release PR, check the
+repository setting that permits GitHub Actions to create pull requests so the
+workflow can use the default `GITHUB_TOKEN`.
+
 ## Repository structure
 
 The skill lives in:
