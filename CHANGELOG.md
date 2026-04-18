@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/madflojo/go-style-agent-skill/compare/v1.0.0...v1.0.1) (2026-04-18)
+
+
+### Documentation
+
+* **go-style-guide:** improve skill discovery metadata ([3fb9ca7](https://github.com/madflojo/go-style-agent-skill/commit/3fb9ca7a30bdaed73f8ded2dc24eea23e2d7ea49))
+* **go-style-guide:** improve skill discovery metadata ([c06205c](https://github.com/madflojo/go-style-agent-skill/commit/c06205c0a9dc22d253e085735ea9c52eb746dcd5))
+
 ## 1.0.0 (2026-03-26)
 
 
