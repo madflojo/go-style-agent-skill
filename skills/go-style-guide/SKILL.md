@@ -1,16 +1,16 @@
 ---
 name: go-style-guide
 description: >
-  Go engineering style guide for designing packages, services, and CLIs.
-  Use for new Go code, refactors, reviews, API design, error and logging
+  Go (Golang) engineering style guide for designing packages, services, and CLIs.
+  Use when writing new golang code, refactors, reviews, API design, error and logging
   patterns, config and constructor decisions, testing, and benchmarks.
 license: Apache-2.0
 metadata:
   author: "Benjamin Cane"
-  version: "0.1"
+  version: "1.0.1"
 ---
 
-# Go Style Guide Skill
+# Go (Golang) Style Guide Skill
 
 This skill defines practical Go engineering conventions optimized for:
 
