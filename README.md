@@ -64,7 +64,27 @@ skills/
 
 ## Installing the skill
 
-Copy the `skills/go-style-guide/` directory into either:
+The preferred installation path is GitHub CLI's `gh skill install` command.
+
+Install directly from GitHub:
+
+```bash
+gh skill install madflojo/go-style-agent-skill
+```
+
+Optional: pin to a release tag or commit SHA when you want reproducible
+installs:
+
+```bash
+gh skill install madflojo/go-style-agent-skill@v1.0.0
+gh skill install madflojo/go-style-agent-skill@<commit-sha>
+```
+
+GitHub CLI installs the skill into the correct directory for the selected
+agent host automatically.
+
+If you prefer a manual install, copy the `skills/go-style-guide/` directory
+into either:
 
 - your repository's `.agents/skills/` directory
 - your user-level `~/.agents/skills/` directory
@@ -72,42 +92,8 @@ Copy the `skills/go-style-guide/` directory into either:
 Adapt the destination to your agent tool's skill-directory convention if it
 differs.
 
-In both cases, the final path should end with:
-
-```text
-.agents/skills/go-style-guide/SKILL.md
-```
-
-The directory name becomes the skill identifier, so the skill should remain
-named `go-style-guide` unless you intentionally want a different invocation
-name.
-
-Example:
-
-```text
-your-project/
-  .agents/
-    skills/
-      go-style-guide/
-        SKILL.md
-        references/
-```
-
-Or install it globally:
-
-```text
-~/.agents/
-  skills/
-    go-style-guide/
-      SKILL.md
-      references/
-```
-
 Once installed, invoke it using the mechanism your agent tool provides for
 running skills. The skill identifier is `go-style-guide`.
-
-The skill files in this repository are already organized so they can be copied
-directly into `.agents/skills/go-style-guide/`.
 
 ## Compatibility notes
 
