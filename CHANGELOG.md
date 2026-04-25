@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.2](https://github.com/madflojo/go-style-agent-skill/compare/v1.0.1...v1.0.2) (2026-04-25)
+
+
+### Documentation
+
+* add npx install path without demoting gh ([d64836b](https://github.com/madflojo/go-style-agent-skill/commit/d64836b01b202969f10adb1d13d7a43213a99971))
+* add npx install path, no side quest ([0596574](https://github.com/madflojo/go-style-agent-skill/commit/05965748bd02c67f569576daec1b0e5c2eff70d1))
+* **go-style-guide:** enhance your Go expertise with style and finesse ✨ ([57663c8](https://github.com/madflojo/go-style-agent-skill/commit/57663c8abeb12524129dd738cecef32d4b94f45c))
+* switch install guidance to gh skill install ([5945366](https://github.com/madflojo/go-style-agent-skill/commit/5945366d27f6bc1771bfbc36af59e3e3a5faa058))
+* switch install guidance to gh skill install ([ec2ea59](https://github.com/madflojo/go-style-agent-skill/commit/ec2ea59042ca6650b8700d0d2215e78d3741735d))
+
 ## [1.0.1](https://github.com/madflojo/go-style-agent-skill/compare/v1.0.0...v1.0.1) (2026-04-18)
 
 
