@@ -64,24 +64,30 @@ skills/
 
 ## Installing the skill
 
-The preferred installation path is GitHub CLI's `gh skill install` command.
+You can install this skill with either GitHub CLI or the `skills` npm package.
 
-Install directly from GitHub:
+Install with GitHub CLI:
 
 ```bash
 gh skill install madflojo/go-style-agent-skill
 ```
 
-Optional: pin to a release tag or commit SHA when you want reproducible
-installs:
+Install with npm via `npx`:
+
+```bash
+npx skills add -g -y madflojo/go-style-agent-skill
+```
+
+Optional: pin the GitHub CLI install to a release tag or commit SHA when you
+want reproducible installs:
 
 ```bash
 gh skill install madflojo/go-style-agent-skill@v1.0.0
 gh skill install madflojo/go-style-agent-skill@<commit-sha>
 ```
 
-GitHub CLI installs the skill into the correct directory for the selected
-agent host automatically.
+Both commands install the skill into the appropriate user-level skill
+directory automatically.
 
 If you prefer a manual install, copy the `skills/go-style-guide/` directory
 into either:
