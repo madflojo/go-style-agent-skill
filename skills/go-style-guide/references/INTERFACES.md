@@ -13,6 +13,24 @@ Not as default return types everywhere.
 
 ---
 
+## Table of Contents
+
+- [Core Philosophy](#core-philosophy)
+- [Rule: Interfaces Belong at Boundaries](#rule-interfaces-belong-at-boundaries)
+- [Rule: Prefer Small Interfaces](#rule-prefer-small-interfaces)
+- [Special Pattern: Shared Contract Package + Driver Subpackages](#special-pattern-shared-contract-package--driver-subpackages)
+- [Rule: "Accept Interfaces, Return Structs"](#rule-accept-interfaces-return-structs)
+- [Rule: Constructors Usually Return Concrete Types](#rule-constructors-usually-return-concrete-types)
+- [When Returning Interfaces Is Correct](#when-returning-interfaces-is-correct)
+- [Rule: Do Not Define Interfaces "For Mocking"](#rule-do-not-define-interfaces-for-mocking)
+- [Injection Pattern: Config + Interface Boundary](#injection-pattern-config--interface-boundary)
+- [Function Interfaces (SDK-Like Pattern)](#function-interfaces-sdk-like-pattern)
+- [Interfaces and Error Contracts](#interfaces-and-error-contracts)
+- [Summary Rules](#summary-rules)
+- [Guiding Rule](#guiding-rule)
+
+---
+
 ## Core Philosophy
 
 ### Interfaces Improve Testability

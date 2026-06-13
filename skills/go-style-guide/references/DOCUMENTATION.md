@@ -7,6 +7,21 @@ public APIs and important internal code.
 
 ---
 
+## Table of Contents
+
+- [Package docs](#package-docs)
+- [Idiomatic godoc](#idiomatic-godoc)
+- [Example functions](#example-functions)
+- [Deprecation comments](#deprecation-comments)
+- [Internal functions](#internal-functions)
+- [Struct fields](#struct-fields)
+- [Package globals](#package-globals)
+- [Summary](#summary)
+- [Durable comments only](#durable-comments-only)
+- [Guiding Rule](#guiding-rule)
+
+---
+
 ## Package docs
 
 Packages that expose reusable behavior should have a package comment.
