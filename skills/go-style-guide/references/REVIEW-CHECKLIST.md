@@ -12,6 +12,7 @@ This checklist is the practical enforcement layer of the style guide.
 - [Logging Rules](#logging-rules)
 - [Documentation + Comments](#documentation--comments)
 - [File + Code Layout](#file--code-layout)
+- [Dependency Discipline](#dependency-discipline)
 - [Concurrency + Lifecycle Safety](#concurrency--lifecycle-safety)
 - [Type Discipline](#type-discipline)
 - [Testing Expectations](#testing-expectations)
@@ -219,6 +220,16 @@ Except in CLI entrypoints.
 - [ ] Small scopes use short names (`i`, `k`, `v`, `r`, `ctx`).
 - [ ] Exported names are clear and domain-specific.
 - [ ] Avoid stutter (`worker.Worker`).
+
+---
+
+## Dependency Discipline
+
+- [ ] Standard library options were considered first.
+- [ ] New dependencies solve a meaningful problem that stdlib or existing dependencies do not solve well.
+- [ ] Broad frameworks are avoided unless their abstraction clearly fits the service or product.
+- [ ] Third-party packages are well-maintained, adopted, and worth their transitive dependency cost.
+- [ ] If the tradeoff is unclear, the reviewer or user was asked before adding the dependency.
 
 ---
 

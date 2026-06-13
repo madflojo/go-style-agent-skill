@@ -478,7 +478,11 @@ Rules:
 
 - keep the `go` version aligned with the repository's actual supported baseline
 - run `go mod tidy` after adding, removing, or renaming imports
+- start with the standard library for common needs such as testing, HTTP
+  servers, JSON, logging, CLI flags, and small utilities
 - do not add a dependency for convenience when the standard library is already sufficient
+- avoid broad frameworks when a focused package or stdlib implementation would
+  keep the code clearer
 - prefer small, focused dependencies over broad utility bundles
 - review indirect dependency churn instead of assuming it is harmless
 
@@ -490,9 +494,11 @@ If a change adds a dependency, be able to explain:
 
 - why the dependency is necessary
 - why an existing dependency or the standard library is not enough
+- whether the dependency is well-maintained and widely adopted enough for its role
 - whether the dependency affects startup time, binary size, or transitive risk
 
 Treat `go mod tidy` output as part of the change, not background noise.
+If the dependency tradeoff is unclear, ask before adding it.
 
 ---
 

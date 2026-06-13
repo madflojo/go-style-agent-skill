@@ -35,6 +35,8 @@ still win.
 - boundary-driven interfaces, following "accept interfaces, return structs"
 - sentinel-first error contracts with preserved wrapping semantics
 - application-owned logging instead of hidden package logging
+- standard-library-first dependency choices with third-party packages only when
+  they add meaningful, well-maintained abstraction
 - idiomatic godoc and durable comments for public and important internal code
 - benchmarks for performance-sensitive code paths
 - shallow, domain-oriented package layouts

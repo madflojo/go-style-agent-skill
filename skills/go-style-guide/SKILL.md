@@ -31,6 +31,8 @@ architecture decisions, package design, or test strategy.
   `%w` or `errors.Join`.
 - Keep packages reusable: no hidden globals, no default logging, no surprise
   side effects.
+- Prefer the standard library before adding dependencies; third-party packages
+  must earn their weight through meaningful, maintained, adopted abstraction.
 - Coverage is a signal, not proof; test edge cases and misuse paths, not just
   happy paths.
 - Follow "accept interfaces, return structs"; consumers usually define
@@ -99,11 +101,11 @@ Follow this workflow when using the skill for implementation work:
 | Constructors | `Config` in -> concrete struct out; validate + default in `New`; use `Config.Validate()` when config logic grows | `references/CONFIG.md` |
 | Errors | Use sentinels for durable branching; wrap with `%w` or `errors.Join`; keep `recover` at app boundaries | `references/ERRORS.md` |
 | Logging | Packages do not log by default; hot-path logging is a performance decision | `references/LOGGING.md` |
+| Dependencies | Standard library first; add third-party packages only when they provide meaningful, maintained value | `references/LAYOUT.md` |
 | Interfaces | "Accept interfaces, return structs"; consumers usually define interfaces | `references/INTERFACES.md` |
 | Documentation | Write idiomatic godoc and durable comments; never add agent-context comments | `references/DOCUMENTATION.md` |
 | Layout | Keep packages shallow, avoid junk drawers, and follow repo conventions | `references/LAYOUT.md` |
 | Entry Points | `main.go` is wiring only | `references/LAYOUT.md` |
-| Dependencies | Keep module changes intentional; justify new dependencies and framework choices | `references/LAYOUT.md` |
 | Benchmarks | Benchmark hot paths; use `b.ReportAllocs()` and compare runs with `benchstat` | `references/BENCHMARKS.md` |
 | Testing | Table-driven, stdlib-first, defensive against misuse, and fuzz-heavy where inputs are complex | `references/TESTING.md` |
 | Concurrency | Every goroutine needs a shutdown path; use `context.Context`, `-race`, and jitter where needed | `references/CONCURRENCY.md` |
@@ -116,6 +118,8 @@ Follow this workflow when using the skill for implementation work:
 - Returning interfaces by default instead of concrete types.
 - Treating coverage percentages as proof of correctness.
 - Logging in reusable packages instead of returning errors.
+- Adding frameworks or helper libraries when the standard library is already
+  clear enough.
 - Passing global app config through packages rather than local `Config`.
 - Leaving critical runtime knobs on dangerous defaults.
 - Forcing a house directory layout onto repos that already have clear
@@ -135,6 +139,9 @@ topic's detail.
   metrics policy.
 - Reusable packages return errors, define local `Config` or `Opts`, accept
   initialized dependencies, and avoid hidden logging or global state.
+- Dependency choices should start with the standard library. Reach for a
+  third-party package only when it solves a real problem, is actively
+  maintained, and earns its transitive cost.
 - Services usually keep `cmd/<appname>/main.go` thin. Follow established repo
   layout over forcing `pkg/`, `internal/`, or any house shape.
 - Libraries usually keep packages shallow and domain-focused.
