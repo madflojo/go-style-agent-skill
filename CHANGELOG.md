@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.3](https://github.com/madflojo/go-style-agent-skill/compare/v1.0.2...v1.0.3) (2026-06-13)
+
+
+### Documentation
+
+* favor stdlib-first dependency guidance ([1b37e12](https://github.com/madflojo/go-style-agent-skill/commit/1b37e120aa05e54d5f2800a620f5b668843e77d2))
+* favor stdlib-first dependency guidance ([7dda3ae](https://github.com/madflojo/go-style-agent-skill/commit/7dda3ae5998c1dfeb0fb968c6f83bcee2d2fec36))
+* tighten skill progressive disclosure ([46b9b83](https://github.com/madflojo/go-style-agent-skill/commit/46b9b833216a8be16dd33214275f5293e675a014))
+* tighten skill progressive disclosure ([69f4eeb](https://github.com/madflojo/go-style-agent-skill/commit/69f4eeb4300bd96a264b787017aa92b553e27236))
+
 ## [1.0.2](https://github.com/madflojo/go-style-agent-skill/compare/v1.0.1...v1.0.2) (2026-04-25)
 
 
