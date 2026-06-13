@@ -13,6 +13,23 @@ The goal is to keep packages reusable, deterministic, and testable.
 
 ---
 
+## Table of Contents
+
+- [Default Rule: Packages Do Not Log](#default-rule-packages-do-not-log)
+- [The Exception: Async / Network / Runtime Packages](#the-exception-async--network--runtime-packages)
+- [Preferred Injection Pattern: `*slog.Logger` via Config](#preferred-injection-pattern-sloglogger-via-config)
+- [Prefer Context-Aware Logging](#prefer-context-aware-logging)
+- [Prefer Error Surfacing Over Logging](#prefer-error-surfacing-over-logging)
+- [Async Error Handling: Prefer `OnError` over `errCh`](#async-error-handling-prefer-onerror-over-errch)
+- [When Local Logging is Acceptable](#when-local-logging-is-acceptable)
+- [Log Levels and Volume](#log-levels-and-volume)
+- [Hot-Path Logging Is a Performance Decision](#hot-path-logging-is-a-performance-decision)
+- [Sensitive Data and Payload Safety](#sensitive-data-and-payload-safety)
+- [What Not To Do](#what-not-to-do)
+- [Summary](#summary)
+
+---
+
 ## Default Rule: Packages Do Not Log
 
 Avoid in libraries:

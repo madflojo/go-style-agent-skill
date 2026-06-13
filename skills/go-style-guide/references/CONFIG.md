@@ -9,6 +9,21 @@ This pattern works well in Go codebases that value clarity, explicit constructio
 
 ---
 
+## Table of Contents
+
+- [Core Principles](#core-principles)
+- [Canonical Pattern](#canonical-pattern)
+- [Constructor Rules](#constructor-rules)
+- [Config Ownership Rules](#config-ownership-rules)
+- [Config Struct Layout](#config-struct-layout)
+- [Logging Injection Exception](#logging-injection-exception)
+- [Operational Controls and Degraded Modes](#operational-controls-and-degraded-modes)
+- [Testability Benefits](#testability-benefits)
+- [Summary Rules](#summary-rules)
+- [Guiding Rule](#guiding-rule)
+
+---
+
 ## Core Principles
 
 The `Config` struct should tell users exactly how to control the behavior of

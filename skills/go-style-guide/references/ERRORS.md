@@ -10,6 +10,20 @@ This applies especially to reusable libraries, SDKs, drivers, and infrastructure
 
 ---
 
+## Table of Contents
+
+- [Core Principles](#core-principles)
+- [Package Error Discipline](#package-error-discipline)
+- [Recover Discipline](#recover-discipline)
+- [Typed Errors (Use Sparingly)](#typed-errors-use-sparingly)
+- [Constructor Error Rules](#constructor-error-rules)
+- [Error Naming Conventions](#error-naming-conventions)
+- [Error Contract Checklist](#error-contract-checklist)
+- [Recommended Pattern Summary](#recommended-pattern-summary)
+- [Guiding Rule](#guiding-rule)
+
+---
+
 ## Core Principles
 
 ### 1. Prefer Sentinel Errors for Durable Meanings

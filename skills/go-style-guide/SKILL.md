@@ -2,9 +2,10 @@
 name: go-style-guide
 description: >
   Provides Go (Golang) engineering guidance for designing packages, services,
-  and CLIs. Use when the task involves new Go code, refactors, code reviews,
-  API design, error handling, logging patterns, config and constructor
-  decisions, testing, and benchmarks.
+  and CLIs. Use whenever the task involves Go implementation, refactors, code
+  reviews, API design, package layout, interfaces, constructors/config, error
+  handling, logging, dependency or framework selection, HTTP/service wiring,
+  concurrency/lifecycle, tests, benchmarks, godoc, or maintainability decisions.
 license: Apache-2.0
 metadata:
   author: "Benjamin Cane"
@@ -13,37 +14,43 @@ metadata:
 
 # Go (Golang) Style Guide Skill
 
-This skill defines practical Go engineering conventions optimized for:
+This skill defines practical Go engineering conventions for humans, coding
+agents, and production-ready systems.
 
-- **humans** reading and maintaining code
-- **coding agents** generating or refactoring code reliably
-- **production readiness** (correctness, testability, performance)
-
-Use this skill whenever you are working with Go: new code, refactors,
-reviews, and architecture decisions.
+Use this skill whenever you are working with Go: new code, refactors, reviews,
+architecture decisions, package design, or test strategy.
 
 ---
 
 ## TL;DR
 
 - Design for testability first; inject dependencies and keep logic pure.
-- Prefer `Config` in → concrete struct out; validate, default, and document important runtime knobs.
-- Errors are contracts: use sentinels for durable branching; wrap the rest with `%w` or `errors.Join`.
-- Keep packages reusable: no hidden globals, no default logging, no surprise side effects.
+- Prefer `Config` in -> concrete struct out; validate, default, and document
+  important runtime knobs.
+- Errors are contracts: use sentinels for durable branching; wrap the rest with
+  `%w` or `errors.Join`.
+- Keep packages reusable: no hidden globals, no default logging, no surprise
+  side effects.
 - Prefer the standard library before adding dependencies; third-party packages
   must earn their weight through meaningful, maintained, adopted abstraction.
-- Coverage is a signal, not proof; test edge cases and misuse paths, not just happy paths.
-- Follow "accept interfaces, return structs"; consumers usually define interfaces, shared contract packages are a special case.
-- Keep `main.go` thin; follow existing repo layout conventions rather than forcing one directory shape.
-- Benchmark hot paths before claiming wins, and run concurrency code with `-race`.
-- Maintain contracts such as function signatures, config shape, error behavior, and doc comments; they are as important as the code itself.
+- Coverage is a signal, not proof; test edge cases and misuse paths, not just
+  happy paths.
+- Follow "accept interfaces, return structs"; consumers usually define
+  interfaces, shared contract packages are a special case.
+- Keep `main.go` thin; follow existing repo layout conventions rather than
+  forcing one directory shape.
+- Benchmark hot paths before claiming wins, and run concurrency code with
+  `-race`.
+- Maintain contracts such as function signatures, config shape, error behavior,
+  and doc comments; they are as important as the code itself.
 
 ---
 
 ## House Style Disclaimer
 
 This is intentionally opinionated. It favors consistency and long-term
-maintainability over accommodating every Go style preference.
+maintainability over accommodating every Go style preference. If the target repo
+has clear local conventions, those conventions usually win.
 
 ---
 
@@ -65,7 +72,7 @@ Follow this workflow when using the skill for implementation work:
 
 2. Define the contract before coding.
    Decide the package boundary, config shape, concrete return type, sentinel
-   errors, and context or shutdown expectations up front.
+   errors, dependency seams, and context or shutdown expectations up front.
 
 3. Write or update tests early when practical.
    Start with table-driven unit tests, add fuzz tests for parsing or other
@@ -91,7 +98,7 @@ Follow this workflow when using the skill for implementation work:
 | Topic | Rule | Reference |
 | --- | --- | --- |
 | Testability | Design for confidence, not coverage percentages; test edge and misuse cases | `references/TESTING.md` |
-| Constructors | `Config` in → concrete struct out; validate + default in `New`; use `Config.Validate()` when config logic grows | `references/CONFIG.md` |
+| Constructors | `Config` in -> concrete struct out; validate + default in `New`; use `Config.Validate()` when config logic grows | `references/CONFIG.md` |
 | Errors | Use sentinels for durable branching; wrap with `%w` or `errors.Join`; keep `recover` at app boundaries | `references/ERRORS.md` |
 | Logging | Packages do not log by default; hot-path logging is a performance decision | `references/LOGGING.md` |
 | Dependencies | Standard library first; add third-party packages only when they provide meaningful, maintained value | `references/LAYOUT.md` |
@@ -111,301 +118,66 @@ Follow this workflow when using the skill for implementation work:
 - Returning interfaces by default instead of concrete types.
 - Treating coverage percentages as proof of correctness.
 - Logging in reusable packages instead of returning errors.
-- Adding frameworks or helper libraries when the standard library is already clear enough.
+- Adding frameworks or helper libraries when the standard library is already
+  clear enough.
 - Passing global app config through packages rather than local `Config`.
 - Leaving critical runtime knobs on dangerous defaults.
-- Forcing a house directory layout onto repos that already have clear conventions.
+- Forcing a house directory layout onto repos that already have clear
+  conventions.
 - Loading every reference document before you know which topic the task touches.
-- Shipping changes that claim performance wins without benchmarks or concurrency safety without `-race`.
+- Shipping changes that claim performance wins without benchmarks or
+  concurrency safety without `-race`.
 
 ---
 
-## Core Principles
+## Core Guidance
 
-### Testability is first-class
+Load reference files only when the task needs that topic's detail.
 
-- Prefer designs that are easy to test without booting an entire application.
-- Inject dependencies explicitly.
-- Keep pure logic isolated.
-- Test edge cases, invalid inputs, and misuse paths rather than only happy paths.
-
-### Config-driven construction
-
-- Prefer `Config` in → struct out constructors.
-- Validate at construction.
-- Default explicitly.
-- Make important runtime knobs visible and documented.
-
-### Errors are a contract
-
-- Prefer **sentinel errors** for durable conditions callers need to branch on.
-- Use `%w` (or `errors.Join`) so callers can use `errors.Is/As`.
-- Prefer a small set of durable meanings plus contextual wrapping.
-
-### Benchmark what matters
-
-- Add benchmarks for performance-sensitive code paths.
-- Avoid "it's faster" claims without `go test -bench`.
-
-### Packages are reusable by default
-
-- Keep packages domain-focused and individually testable.
-- Avoid global state and hidden side effects.
-
-### Dependencies must earn their place
-
-- Start with the standard library for tests, HTTP servers, JSON, logging, CLI
-  plumbing, and other common Go needs.
-- Do not add broad frameworks or helper libraries when `testing`, `net/http`,
-  `encoding/json`, `log/slog`, `flag`, or small local helpers are enough.
-- Use third-party packages when they provide meaningful abstraction, strong
-  ecosystem adoption, active maintenance, or clear risk reduction.
-- Prefer small, focused libraries over large frameworks with heavy transitive
-  dependency graphs.
-- If the tradeoff is unclear, ask before adding the dependency.
-
-### Structure should reinforce intent
-
-- Use package boundaries and entry points as architectural guardrails.
-- Follow established repo conventions when they are clear.
+- App packages own dependency wiring, lifecycle, error policy, logging, and
+  metrics policy.
+- Reusable packages return errors, define local `Config` or `Opts`, accept
+  initialized dependencies, and avoid hidden logging or global state.
+- Dependency choices should start with the standard library. Reach for a
+  third-party package only when it solves a real problem, is actively
+  maintained, and earns its transitive cost.
+- Services usually keep `cmd/<appname>/main.go` thin. Follow established repo
+  layout over forcing `pkg/`, `internal/`, or any house shape.
+- Libraries usually keep packages shallow and domain-focused.
+- Constructors prefer `New(cfg Config) (*T, error)`, explicit defaults,
+  validation, concrete returns, and immutable normalized config.
+- Interfaces should be small, boundary-driven, and usually consumer-defined.
+- Tests should be table-driven, stdlib-first, defensive, and run with `-race`
+  for concurrency-sensitive code.
+- Performance claims need benchmarks.
+- Docs, comments, config defaults, error behavior, and signatures are part of
+  the contract.
 
 ---
 
-## Package Types
-
-### App package (orchestrator)
-
-Owns:
-
-- dependency wiring (DB, clients, loggers)
-- lifecycle (start/stop)
-- error policy (retry, ignore, crash)
-- logging and metrics policy
-
-### Non-app packages (reusable units)
-
-Rules:
-
-- No direct logging (see `references/LOGGING.md`)
-- Return errors, don't hide them
-- Define a local `Config`/`Opts` contract
-- Accept initialized dependencies (DB/client/etc); do not create them internally
-
----
-
-## Directory Structure
-
-### Services / apps
-
-- `cmd/<appname>/main.go` for entrypoints
-- Keep `main.go` **thin**: parse config, wire dependencies, call the app entrypoint.
-
-This guide often prefers service repos that group packages under `pkg/`, with
-orchestration in something like `pkg/app`, but that is a house preference, not
-Go law.
-
-Example:
-
-```text
-cmd/myapp/main.go
-pkg/...
-pkg/app/...
-```
-
-If a repository already uses top-level packages, `internal/`, or a mixed shape
-with clear rules, follow the repository convention instead of forcing `pkg/`.
-Do not restructure an existing repository to introduce `pkg/` unless you were
-explicitly asked to do that migration.
-
-### Libraries
-
-- Packages at top-level directories, not nested under `pkg/` or `internal/`.
-
-- Avoid junk drawers (`utils`, `common`) unless they truly represent a domain.
-
----
-
-## Constructors and Config
-
-- `New(cfg Config) (*T, error)` or `Dial(cfg Config) (*T, error)`
-- Prefer passing `Config` by value; validate + default inside constructor
-- For complex configs, move non-trivial validation into `func (c *Config) Validate() error`
-- Return a **concrete** type by default
-- Treat constructor-normalized config as immutable internal state
-- Config is owned by the package, not the app
-- Avoid `init()` for normal construction; it usually hides globals, ordering
-  dependencies, or side effects better handled by explicit setup
-- Follow "accept interfaces, return structs": inject boundary interfaces and
-  return concrete types unless there is a clear multi-implementation boundary
-- Make important runtime knobs explicit: timeouts, pool sizes, lifetimes,
-  backoff/retry ceilings, and similar operational settings
-- Use explicit runtime controls for degraded modes in critical services; do not
-  expect callers to mutate `Config` after construction
-
-See: `references/CONFIG.md`, `references/INTERFACES.md`
-
----
-
-## Logging
-
-Logging is owned by the application.
-
-If a package must log (rare async/network/runtime cases), inject
-**`*slog.Logger`** via `Config`, default to discard, keep structured logs, and
-prefer context-aware log methods when a real `context.Context` is already
-available.
-
-Treat hot-path logging as a performance decision. Avoid chatty request-path
-`Info` logs, and if async logging is used, document buffering, backpressure,
-and drop behavior.
-
-See: `references/LOGGING.md`
-
----
-
-## Errors
-
-- Export `var ErrX = errors.New("...")` for stable, durable meanings callers may
-  need to branch on
-- Wrap with `%w` or use `errors.Join` so `errors.Is` works
-- Don't use `%s` to wrap errors (it breaks unwrap semantics)
-- Prefer a small set of sentinels plus contextual wrapping rather than a new
-  sentinel for every failure path
-- Keep `recover` at application boundaries or middleware, not in reusable
-  packages
-- Packages return errors; apps log them and decide whether to ignore, retry, or crash
-
-See: `references/ERRORS.md`
-
----
-
-## Testing
-
-- Prefer table-driven tests with clear, behavior-oriented case names.
-- Coverage is a signal, not proof; confidence comes from meaningful assertions
-  and edge cases.
-- Test defensive behavior, not just the current happy path.
-- Use `go test -fuzz` for parsers, decoders, and other input-heavy code.
-- Use `TestMain` only for true package-wide lifecycle setup/teardown.
-- Run `-race` in CI for concurrency-sensitive code.
-
-See: `references/TESTING.md`
-
----
-
-## Documentation + Comments
-
-- Public packages need package docs explaining purpose and main usage, using
-  `/** ... */` package comments.
-- Exported identifiers get idiomatic doc comments, helpful links like `[Config]`,
-  and executable `Example_` docs when teaching usage matters. Functions,
-  methods, types, vars, consts, and fields use `//` doc comments.
-- Comments explain why, contract, or intent; never narrate obvious code.
-- No agent-context comments or self-referential TODO/FIXME notes.
-
-See: `references/DOCUMENTATION.md`
-
----
-
-## Concurrency
-
-- Every goroutine must have a clear shutdown path via `context.Context`.
-- Long-lived services implement `Close()` or `Stop()` with concurrency synchronization to ensure graceful shutdown.
-- Use `sync.Mutex` for complex state, `sync/atomic` for simple counters and flags.
-- Prefer `select` with `ctx.Done()` for blocking operations.
-- Use context-aware I/O APIs such as `QueryContext` and `NewRequestWithContext`.
-- Use `defer` for cleanup in the scope that acquires a resource.
-- Add jitter to recurring background work when synchronized schedules would
-  create spikes.
-- Graceful shutdown should fail readiness, drain in-flight work, stop listeners,
-  and wait for tracked work to finish.
-- If it's not tested with `-race`, assume it's not concurrency-safe.
-
-See: `references/CONCURRENCY.md`
-
----
-
-## File Organization and Efficiency
-
-Files follow idiomatic ordering: package docs, imports, consts/vars, sentinel
-errors, types, constructors, exported methods, unexported helpers. Avoid
-catch-all files like `types.go` or `util.go`.
-
-Keep hot-path structs compact (field ordering for padding) but do not
-micro-optimize without benchmarks.
-
-Use structure as an architectural guardrail. Package boundaries and entry
-points should make the intended placement of new behavior obvious.
-
-Avoid `init()` in general. It is often a sign of hidden globals, implicit
-registration, or startup side effects that should be made explicit.
-
-See: `references/LAYOUT.md`
-
----
-
-## Benchmarks
-
-Add benchmarks for hot-path functions, serialization, concurrency primitives,
-and adapters in tight loops. Use `b.ReportAllocs()`, include realistic inputs,
-and compare alternatives when proposing changes.
-
-Let the runner control `b.N`, run important numbers on a quiet machine, and use
-`benchstat` when comparing benchmark results.
-
-See: `references/BENCHMARKS.md`
-
----
-
-## Interfaces + Implementations
-
-Default to small consumer-defined interfaces and producer-owned concrete
-structs.
-
-Use shared contract packages with subpackages (`drivers/`, `backends/`, etc.)
-as a special case when the package's primary purpose is to define a common
-boundary across multiple implementations.
-
-See: `references/INTERFACES.md`
-
----
-
-## Reference Index
-
-Use these supporting documents when deeper detail is needed:
-
-- [references/LOGGING.md](references/LOGGING.md)
-  Logging rules: default no-logging-in-packages guidance, exceptions, `slog`
-  injection, and hot-path cost guidance.
-
-- [references/ERRORS.md](references/ERRORS.md)
-  Durable error contracts, wrapping rules, and `errors.Is/As` guidance.
-
-- [references/CONFIG.md](references/CONFIG.md)
-  Canonical `Config` struct patterns, constructor validation + defaults, and
-  operational controls.
-
-- [references/INTERFACES.md](references/INTERFACES.md)
-  Interface boundaries, consumer-defined defaults, and special-case driver
-  patterns.
-
-- [references/DOCUMENTATION.md](references/DOCUMENTATION.md)
-  Package docs, idiomatic godoc, internal function comments, field docs, and durable comment rules.
-
-- [references/LAYOUT.md](references/LAYOUT.md)
-  File organization, dependency hygiene, struct field efficiency, package
-  naming guidance, and architectural guardrails.
-
-- [references/BENCHMARKS.md](references/BENCHMARKS.md)
-  Benchmark expectations, templates, and result-comparison rules.
-
-- [references/TESTING.md](references/TESTING.md)
-  Stdlib-first testing patterns, table-driven tests, helpers, defensive testing,
-  and test file conventions.
-
-- [references/CONCURRENCY.md](references/CONCURRENCY.md)
-  Goroutine lifecycle, context propagation, graceful shutdown, `-race`, jitter,
-  and synchronization patterns.
-
-- [references/REVIEW-CHECKLIST.md](references/REVIEW-CHECKLIST.md)
-  PR review rubric for humans and coding agents.
+## Reference Loading
+
+Load only the references needed for the active task:
+
+- Read [references/CONFIG.md](references/CONFIG.md) for constructors,
+  `Config` structs, defaults, validation, degraded modes, or logging injection.
+- Read [references/INTERFACES.md](references/INTERFACES.md) for interface
+  boundaries, driver patterns, mocks/fakes, or concrete return decisions.
+- Read [references/ERRORS.md](references/ERRORS.md) for sentinel errors,
+  wrapping, typed errors, recover placement, or constructor failures.
+- Read [references/LOGGING.md](references/LOGGING.md) for package logging,
+  `slog`, log levels, async error surfaces, or payload safety.
+- Read [references/TESTING.md](references/TESTING.md) for table-driven tests,
+  fuzzing, `testdata`, integration gates, test helpers, or assertion choices.
+- Read [references/CONCURRENCY.md](references/CONCURRENCY.md) for goroutines,
+  context propagation, graceful shutdown, mutex/atomic/channel choices, jitter,
+  or race testing.
+- Read [references/LAYOUT.md](references/LAYOUT.md) for package layout, file
+  naming, `main.go`, dependency hygiene, struct field layout, or export rules.
+- Read [references/DOCUMENTATION.md](references/DOCUMENTATION.md) for package
+  docs, godoc, examples, deprecations, internal comments, or field docs.
+- Read [references/BENCHMARKS.md](references/BENCHMARKS.md) for benchmark
+  shape, allocation reporting, concurrent benchmarks, IO benchmarks, or
+  `benchstat`.
+- Read [references/REVIEW-CHECKLIST.md](references/REVIEW-CHECKLIST.md) when
+  reviewing a Go PR or doing a final self-check.

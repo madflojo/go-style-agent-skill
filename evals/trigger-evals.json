@@ -1,0 +1,50 @@
+[
+  {
+    "query": "Design a small Go package API for a cache with TTL, explicit configuration, and clean error behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this Go PR for package layout, constructor design, logging, tests, and error handling.",
+    "should_trigger": true
+  },
+  {
+    "query": "For this Go service, should I use net/http directly or add a web framework?",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me make this Go background worker shut down cleanly and pass race testing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write table-driven tests for this Go parser and decide whether fuzzing belongs here.",
+    "should_trigger": true
+  },
+  {
+    "query": "Tighten the godoc comments for these exported Go types and examples.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write pytest tests for this Python module.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rewrite this README introduction to sound more concise and friendly.",
+    "should_trigger": false
+  },
+  {
+    "query": "Open a GitHub pull request for my current branch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Make this React dashboard layout more polished and responsive.",
+    "should_trigger": false
+  },
+  {
+    "query": "What version of Go is installed?",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this SQL migration for index and constraint issues.",
+    "should_trigger": false
+  }
+]

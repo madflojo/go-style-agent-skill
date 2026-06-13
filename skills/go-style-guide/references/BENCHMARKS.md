@@ -21,6 +21,21 @@ Benchmarks are especially important for:
 
 ---
 
+## Table of Contents
+
+- [Rules](#rules)
+- [Benchmark File Conventions](#benchmark-file-conventions)
+- [Standard Benchmark Template](#standard-benchmark-template)
+- [Table-Driven Benchmarks](#table-driven-benchmarks)
+- [Concurrency Benchmarks](#concurrency-benchmarks)
+- [Avoid Benchmark Traps](#avoid-benchmark-traps)
+- [Benchmarking IO / Network Code](#benchmarking-io--network-code)
+- [Regression Discipline](#regression-discipline)
+- [Comparing results with benchstat](#comparing-results-with-benchstat)
+- [Summary](#summary)
+
+---
+
 ## Rules
 
 ### 1) Benchmark performance-sensitive code by default
