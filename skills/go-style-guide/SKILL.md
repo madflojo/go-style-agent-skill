@@ -132,8 +132,7 @@ Follow this workflow when using the skill for implementation work:
 
 ## Core Guidance
 
-Keep the entrypoint lean. Load reference files only when the task needs that
-topic's detail.
+Load reference files only when the task needs that topic's detail.
 
 - App packages own dependency wiring, lifecycle, error policy, logging, and
   metrics policy.
