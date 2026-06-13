@@ -30,6 +30,8 @@ reviews, and architecture decisions.
 - Prefer `Config` in → concrete struct out; validate, default, and document important runtime knobs.
 - Errors are contracts: use sentinels for durable branching; wrap the rest with `%w` or `errors.Join`.
 - Keep packages reusable: no hidden globals, no default logging, no surprise side effects.
+- Prefer the standard library before adding dependencies; third-party packages
+  must earn their weight through meaningful, maintained, adopted abstraction.
 - Coverage is a signal, not proof; test edge cases and misuse paths, not just happy paths.
 - Follow "accept interfaces, return structs"; consumers usually define interfaces, shared contract packages are a special case.
 - Keep `main.go` thin; follow existing repo layout conventions rather than forcing one directory shape.
@@ -92,6 +94,7 @@ Follow this workflow when using the skill for implementation work:
 | Constructors | `Config` in → concrete struct out; validate + default in `New`; use `Config.Validate()` when config logic grows | `references/CONFIG.md` |
 | Errors | Use sentinels for durable branching; wrap with `%w` or `errors.Join`; keep `recover` at app boundaries | `references/ERRORS.md` |
 | Logging | Packages do not log by default; hot-path logging is a performance decision | `references/LOGGING.md` |
+| Dependencies | Standard library first; add third-party packages only when they provide meaningful, maintained value | `references/LAYOUT.md` |
 | Interfaces | "Accept interfaces, return structs"; consumers usually define interfaces | `references/INTERFACES.md` |
 | Documentation | Write idiomatic godoc and durable comments; never add agent-context comments | `references/DOCUMENTATION.md` |
 | Layout | Keep packages shallow, avoid junk drawers, and follow repo conventions | `references/LAYOUT.md` |
@@ -108,6 +111,7 @@ Follow this workflow when using the skill for implementation work:
 - Returning interfaces by default instead of concrete types.
 - Treating coverage percentages as proof of correctness.
 - Logging in reusable packages instead of returning errors.
+- Adding frameworks or helper libraries when the standard library is already clear enough.
 - Passing global app config through packages rather than local `Config`.
 - Leaving critical runtime knobs on dangerous defaults.
 - Forcing a house directory layout onto repos that already have clear conventions.
@@ -147,6 +151,18 @@ Follow this workflow when using the skill for implementation work:
 
 - Keep packages domain-focused and individually testable.
 - Avoid global state and hidden side effects.
+
+### Dependencies must earn their place
+
+- Start with the standard library for tests, HTTP servers, JSON, logging, CLI
+  plumbing, and other common Go needs.
+- Do not add broad frameworks or helper libraries when `testing`, `net/http`,
+  `encoding/json`, `log/slog`, `flag`, or small local helpers are enough.
+- Use third-party packages when they provide meaningful abstraction, strong
+  ecosystem adoption, active maintenance, or clear risk reduction.
+- Prefer small, focused libraries over large frameworks with heavy transitive
+  dependency graphs.
+- If the tradeoff is unclear, ask before adding the dependency.
 
 ### Structure should reinforce intent
 
@@ -377,8 +393,8 @@ Use these supporting documents when deeper detail is needed:
   Package docs, idiomatic godoc, internal function comments, field docs, and durable comment rules.
 
 - [references/LAYOUT.md](references/LAYOUT.md)
-  File organization, struct field efficiency, package naming guidance, and
-  architectural guardrails.
+  File organization, dependency hygiene, struct field efficiency, package
+  naming guidance, and architectural guardrails.
 
 - [references/BENCHMARKS.md](references/BENCHMARKS.md)
   Benchmark expectations, templates, and result-comparison rules.
