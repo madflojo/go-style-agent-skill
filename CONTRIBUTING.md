@@ -91,9 +91,9 @@ Examples:
 - `fix: correct error wrapping example`
 - `docs: clarify global skill installation path`
 
-Release Please uses Git tags as the canonical repository version. The
-`metadata.version` field in `skills/go-style-guide/SKILL.md` is informational
-only and is not release-managed.
+Release Please uses Git tags as the canonical repository version. Skill
+frontmatter omits `metadata.version` so installed copies cannot advertise a
+stale version that differs from the release tag.
 
 Changes merged without a conventional commit prefix can still land, but they may
 not produce useful release notes.
