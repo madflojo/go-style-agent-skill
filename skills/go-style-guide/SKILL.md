@@ -9,7 +9,6 @@ description: >
 license: Apache-2.0
 metadata:
   author: "Benjamin Cane"
-  version: "1.0.1"
 ---
 
 # Go (Golang) Style Guide Skill
